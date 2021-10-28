@@ -53,6 +53,7 @@ def main() -> None:
         game.show_choices()
         # Ask the player what they want to do
         # Change the state of the environment
+        game.get_choice()
         # Check win/lose conditions
 
 
