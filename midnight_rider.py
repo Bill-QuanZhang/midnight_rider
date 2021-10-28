@@ -28,12 +28,18 @@ class Game:
             sys.stdout.write(char)
             sys.stdout.flush()
 
+    def show_choices(self) -> None:
+        """Show the user their choices"""
+        time.sleep(1)
+        print(midnight_rider_text.CHOICES)
+
 
 def main() -> None:
     game = Game()   # starting a new game
     game.introduction()
 
     # Main Loop:
+    while not game.done:
         # Display the choices to the player
         # Ask the player what they want to do
         # Change the state of the environment
