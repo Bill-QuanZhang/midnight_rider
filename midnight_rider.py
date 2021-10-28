@@ -14,10 +14,14 @@ class Game:
     """
     def introduction(self) -> None:
         """Print the introduction text"""
-        print(midnight_rider_text.INTRODUCTION)
+        self.typewriter_effect(midnight_rider_text.INTRODUCTION)
 
     def typewriter_effect(self, text: str) -> None:
         """Print out to console with a typewriter effect"""
+        for char in textwrap.dedent(text):
+            time.sleep(0.05)
+            sys.stdout.write(char)
+            sys.stdout.flush()
 
 
 def main() -> None:
