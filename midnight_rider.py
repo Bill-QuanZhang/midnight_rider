@@ -1,5 +1,7 @@
 # Midnight Rider
 
+import midnight_rider_text
+
 # A text-based game of intrigue and illusion
 
 
