@@ -15,7 +15,7 @@ class Game:
         done: describes the game is finished or not - bool
     """
     def __init__(self):
-        done = False
+        self.done = False
 
     def introduction(self) -> None:
         """Print the introduction text"""
@@ -32,7 +32,16 @@ class Game:
         """Show the user their choices"""
         time.sleep(1)
         print(midnight_rider_text.CHOICES)
+        time.sleep(1)
 
+    def get_choice(self) -> None:
+        """Gets the user's choice and changes the environment"""
+        # get the user's response
+        user_choice = input().strip(",.?!").lower()
+
+        # Based on their choice, change the attributes of class
+        if user_choice == "q":
+            self.done = True
 
 def main() -> None:
     game = Game()   # starting a new game
@@ -41,6 +50,7 @@ def main() -> None:
     # Main Loop:
     while not game.done:
         # Display the choices to the player
+        game.show_choices()
         # Ask the player what they want to do
         # Change the state of the environment
         # Check win/lose conditions
