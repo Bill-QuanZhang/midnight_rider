@@ -66,11 +66,13 @@ class Game:
             print("-----Status Check-----")
             # print out distance traveled
             print(f"Distance Traveled: {self.distance_traveled} kms")
+            print(f"Fuel Remaining: {self.fuel} L")
             # print out amount of tofu left
             print(f"Tofu Left: {self.amount_of_tofu} pieces")
             # print out AGENTS distance
             print(f"Agents Distance: {abs(self.agents_distance)} kms behind")
             print("----------")
+            time.sleep(2)
         if user_choice == "q":
             self.done = True
 
