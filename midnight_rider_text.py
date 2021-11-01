@@ -16,6 +16,7 @@ GON GETCHU.
 
 CHOICES = """
     --- Your Choices ---
+    B. Speed ahead at slow speed
     C. Speed ahead at full speed
     D. stop to refuel
     E. Current current Status
