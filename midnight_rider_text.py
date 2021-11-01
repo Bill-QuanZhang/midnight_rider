@@ -16,6 +16,7 @@ GON GETCHU.
 
 CHOICES = """
     --- Your Choices ---
+    C. Speed ahead at full speed
     D. stop to refuel
     E. Current current Status
     Q. Quit the game.
