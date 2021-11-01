@@ -69,7 +69,7 @@ class Game:
             self.fuel -= random.randrange(3, 9)
 
             # Give the player some feedback
-            print(f"----------ZOOM.")
+            print(f"----------Wuu.")
             print(f"----------You traveled {player_distance_now} kms. \n")
 
         if user_choice == "c":
