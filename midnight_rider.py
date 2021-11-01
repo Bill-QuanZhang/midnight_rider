@@ -53,9 +53,24 @@ class Game:
         user_choice = input().strip(",.?!").lower()
 
         # Based on their choice, change the attributes of class
-        # implement slow traveling
         # implement eating/hunger
         agents_distance_now = random.randrange(7, 15)
+
+        if user_choice == "b":
+            # implement slow traveling
+            # Move the player
+            player_distance_now = random.randrange(8, 14)
+            self.distance_traveled += player_distance_now
+
+            # Move the agents
+            self.agents_distance += agents_distance_now - player_distance_now
+
+            # Burn fuel
+            self.fuel -= random.randrange(3, 9)
+
+            # Give the player some feedback
+            print(f"----------ZOOM.")
+            print(f"----------You traveled {player_distance_now} kms. \n")
 
         if user_choice == "c":
             # implement quick traveling
@@ -70,7 +85,7 @@ class Game:
             self.fuel -= random.randrange(5, 11)
 
             # Give the player some feedback
-            print(f"----------ZOOOOOOOOOOM.")
+            print(f"----------ZOOM.")
             print(f"----------You traveled {player_distance_now} kms. \n")
 
         elif user_choice == "d":
