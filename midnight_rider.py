@@ -11,6 +11,7 @@ import midnight_rider_text
 # CONStANTS
 MAX_FUEL = 50
 MAX_TOFU = 3
+MAX_HUNGER = 50
 
 
 class Game:
@@ -22,6 +23,7 @@ class Game:
         amount_of_tofu: how much tofu we have left in our inventory
         agents_distance: describes the distance between the player and the agents
         fuel: describes amount of fuel remaining, starts off 50
+        hunger: describe how hungry our player is, represented by a number 0-50,if hunger goes beyong 50, game is over
     """
     def __init__(self):
         self.done = False
@@ -29,6 +31,7 @@ class Game:
         self.amount_of_tofu = MAX_TOFU
         self.agents_distance = -20
         self.fuel = MAX_FUEL
+        self.hunger = 0
 
     def introduction(self) -> None:
         """Print the introduction text"""
@@ -53,10 +56,25 @@ class Game:
         user_choice = input().strip(",.?!").lower()
 
         # Based on their choice, change the attributes of class
-        # implement eating/hunger
+
         agents_distance_now = random.randrange(7, 15)
 
-        if user_choice == "b":
+        # implement eating/hunger
+        if user_choice == "a":
+            # Consume one tofu IF and ONLY IF we have some available
+            if self.amount_of_tofu > 0:
+                self.amount_of_tofu -= 1
+
+                # Decrease hunger to 0
+                self.hunger = 0
+                # Give the player some feedback
+                # And text to midnight_rider_text.py
+                print(midnight_rider_text.EAT_TOFU)
+            else:
+                # Tell the player they don't have tofu
+                print(midnight_rider_text.NO_TOFU)
+
+        elif user_choice == "b":
             # implement slow traveling
             # Move the player
             player_distance_now = random.randrange(8, 14)
