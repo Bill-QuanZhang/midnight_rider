@@ -90,7 +90,7 @@ class Game:
             print(f"----------Wuu.")
             print(f"----------You traveled {player_distance_now} kms. \n")
 
-        if user_choice == "c":
+        elif user_choice == "c":
             # implement quick traveling
             # Move the player
             player_distance_now = random.randrange(10, 16)
@@ -115,6 +115,7 @@ class Game:
 
             # Give the user feedback
             print(midnight_rider_text.REFUEL)
+
         elif user_choice == "e":
             print("-----Status Check-----")
             # print out distance traveled
@@ -126,8 +127,17 @@ class Game:
             print(f"Agents Distance: {abs(self.agents_distance)} kms behind")
             print("----------")
             time.sleep(2)
-        if user_choice == "q":
+
+        elif user_choice == "q":
             self.done = True
+
+    def upkeep(self) -> None:
+        """Give the user reminders of hunger"""
+        if self.hunger > 40:
+            print(midnight_rider_text.SEVERE_HUNGER)
+        elif self.hunger > 25:
+            print(midnight_rider_text.HUNGER)
+
 
 def main() -> None:
     game = Game()   # starting a new game
@@ -135,6 +145,7 @@ def main() -> None:
 
     # Main Loop:
     while not game.done:
+        game.upkeep()
         # Display the choices to the player
         game.show_choices()
         # Ask the player what they want to do
