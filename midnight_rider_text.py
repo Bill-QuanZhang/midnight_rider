@@ -35,3 +35,10 @@ Your hunger is stated.
 
 NO_TOFU = """-----You have no tofu left.
 """
+
+SEVERE_HUNGER = """*****Your stomach rumbles.
+******You need to eat something quick.
+"""
+
+HUNGER = """*****Your hunger is small but manageable.
+"""
