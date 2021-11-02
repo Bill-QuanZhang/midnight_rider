@@ -30,7 +30,7 @@ REFUEL = """----------You filled the fuel tank
 """
 
 EAT_TOFU = """-----Emm. Soybean goodness.
-Your hunger is stated.
+Your hunger is sated.
 """
 
 NO_TOFU = """-----You have no tofu left.
