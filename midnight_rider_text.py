@@ -16,6 +16,7 @@ GON GETCHU.
 
 CHOICES = """
     --- Your Choices ---
+    A. Eat a tofu
     B. Speed ahead at slow speed
     C. Speed ahead at full speed
     D. stop to refuel
@@ -26,4 +27,11 @@ CHOICES = """
 
 REFUEL = """----------You filled the fuel tank
 ----------The agents got closer...
+"""
+
+EAT_TOFU = """-----Emm. Soybean goodness.
+Your hunger is stated.
+"""
+
+NO_TOFU = """-----You have no tofu left.
 """
