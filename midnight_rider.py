@@ -12,6 +12,14 @@ import midnight_rider_text
 MAX_FUEL = 50
 MAX_TOFU = 3
 MAX_HUNGER = 50
+MAX_DISTANCE = 100
+
+ENDGAME_REASONS = {
+    "LOSE_AGENTS": 1,
+    "LOSE_FUEL": 2,
+    "LOSE_HUNGER": 3,
+    "WIN": 4
+}
 
 
 class Game:
@@ -23,7 +31,8 @@ class Game:
         amount_of_tofu: how much tofu we have left in our inventory
         agents_distance: describes the distance between the player and the agents
         fuel: describes amount of fuel remaining, starts off 50
-        hunger: describe how hungry our player is, represented by a number 0-50,if hunger goes beyong 50, game is over
+        hunger: describe how hungry our player is, represented by a number 0-50,if hunger goes beyond 50, game is over
+        endgame_reason: shows the index of teh game ending text from midnight_rider_text.py
     """
     def __init__(self):
         self.done = False
@@ -32,6 +41,7 @@ class Game:
         self.agents_distance = -20
         self.fuel = MAX_FUEL
         self.hunger = 0
+        self.endgame_reason = 0
 
     def introduction(self) -> None:
         """Print the introduction text"""
@@ -142,6 +152,33 @@ class Game:
         elif self.hunger > 25:
             print(midnight_rider_text.HUNGER)
 
+        time.sleep(1)
+
+    def check_endgame(self) -> None:
+        """Check to see if win/lose conditions are met.
+        If they're met, change the self.done flag."""
+        # LOSE - Agents catch up to the player
+        if self.agents_distance >= 0:
+            # Allows us to quit the while loop
+            self.done = True
+            # Helps with printing the right ending
+            self.endgame_reason = ENDGAME_REASONS["LOSE_AGENTS"]
+        # LOSE - Fuel runs out
+        if self.fuel <= 0:
+            self.done = True
+
+            self.endgame_reason = ENDGAME_REASONS["LOSE_FUEL"]
+        # LOSE - Perish because of hunger
+        if self.hunger > MAX_HUNGER:
+            self.done = True
+
+            self.endgame_reason = ENDGAME_REASONS["LOSE_HUNGER"]
+        # WIN - Reach the goal
+        if self.distance_traveled >= MAX_DISTANCE:
+            self.done = True
+
+            self.endgame_reason = ENDGAME_REASONS["WIN"]
+
 
 def main() -> None:
     game = Game()   # starting a new game
@@ -156,6 +193,13 @@ def main() -> None:
         # Change the state of the environment
         game.get_choice()
         # Check win/lose conditions
+        game.check_endgame()
+
+    time.sleep(3)
+    # PRINT OUT THE ENDING
+    game.typewriter_effect(
+        midnight_rider_text.ENDGAME_TEXT[game.endgame_reason]
+    )
 
 
 if __name__ == "__main__":
