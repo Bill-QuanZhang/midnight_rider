@@ -17,3 +17,10 @@ BLUE = (0, 0, 255)
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
+
+def main() -> None:
+    """Driver of Python script"""
+
+
+if __name__ == "__maim__":
+    main()
