@@ -41,6 +41,10 @@ def main() -> None:
 
         # Draw the environment
         screen.fill(WHITE)      # fill with background color
+        for i in range(10):
+            pygame.draw.rect(screen, RED, [100 + i * 10, 100 + i * 10, 75, 30])
+
+        pygame.draw.circle(screen, BLUE, [150, 105], 5)
 
         # Update the screen
         pygame.display.flip()
@@ -49,5 +53,5 @@ def main() -> None:
         clock.tick(60)
 
 
-if __name__ == "__maim__":
+if __name__ == "__main__":
     main()
