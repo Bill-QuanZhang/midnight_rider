@@ -44,7 +44,7 @@ def main() -> None:
         for i in range(10):
             pygame.draw.rect(screen, RED, [100 + i * 10, 100 + i * 10, 75, 30])
 
-        pygame.draw.circle(screen, BLUE, [150, 105], 5)
+        pygame.draw.circle(screen, BLUE, [500, 150], 50)
 
         # Update the screen
         pygame.display.flip()
