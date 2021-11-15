@@ -34,6 +34,10 @@ class Dvdimage:
         self.height = 90
         self.colour = RED
 
+    def rect(self) -> pygame.rect:
+        """Return a pygame.rect that represents the dvd_image"""
+        return [self.x, self.y, self.width, self.height]
+
 
 def main() -> None:
     """Driver of Python script"""
@@ -63,7 +67,7 @@ def main() -> None:
         pygame.draw.circle(screen, BLUE, [500, 150], 50)
 
         # Draw our Dvdimage
-        pygame.draw.rect(screen, dvd_image.colour, [])  # method
+        pygame.draw.rect(screen, dvd_image.colour, dvd_image.rect())  # method
 
         # Update the screen
         pygame.display.flip()
