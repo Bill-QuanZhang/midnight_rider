@@ -27,16 +27,27 @@ class Dvdimage:
         width: width of our rectangle in px
         height: height of our rectangle in ps
         colour: 3-tuple of (r, g, b)
+        x-vel: x velocity in px/second
+        y-vel: y velocity in px/second
     """
     def __init__(self):
         self.x, self.y = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         self.width = 150
         self.height = 90
         self.colour = RED
+        self.x_vel = 5
+        self.y_vel = 3
 
     def rect(self) -> pygame.rect:
         """Return a pygame.rect that represents the dvd_image"""
         return [self.x, self.y, self.width, self.height]
+
+    def update(self) -> None:
+        """Update the dvdimage with x, y vel"""
+        # Update the x-coordinate
+        self.x += self.x_vel
+        # Update the y-coordinate
+        self.y += self.y_vel
 
 
 def main() -> None:
@@ -58,6 +69,7 @@ def main() -> None:
                 done = True
 
         # Change the environment
+        dvd_image.update()
 
         # Draw the environment
         screen.fill(WHITE)      # fill with background color
