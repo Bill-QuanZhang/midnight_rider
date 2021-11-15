@@ -61,10 +61,10 @@ def main() -> None:
 
         # Draw the environment
         screen.fill(WHITE)      # fill with background color
-        for i in range(10):
-            pygame.draw.rect(screen, RED, [100 + i * 10, 100 + i * 10, 75, 30])
+        # for i in range(10):
+        #     pygame.draw.rect(screen, RED, [100 + i * 10, 100 + i * 10, 75, 30])
 
-        pygame.draw.circle(screen, BLUE, [500, 150], 50)
+        # pygame.draw.circle(screen, BLUE, [500, 150], 50)
 
         # Draw our Dvdimage
         pygame.draw.rect(screen, dvd_image.colour, dvd_image.rect())  # method
