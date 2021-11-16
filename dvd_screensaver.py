@@ -70,6 +70,7 @@ def main() -> None:
 
         # Change the environment
         dvd_image.update()
+        print(f"x: {dvd_image.x}, y: {dvd_image.y}")
 
         # Draw the environment
         screen.fill(WHITE)      # fill with background color
