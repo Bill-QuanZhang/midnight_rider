@@ -36,7 +36,7 @@ class Dvdimage:
         self.width = 400
         self.height = 497
         # self.colour = RED
-        self.img = pygame.image.load("./images/163600626.jpg")
+        self.img = pygame.image.load("./images/163600626.jpeg")
         self.x_vel = 5
         self.y_vel = 3
 
@@ -60,6 +60,7 @@ class Dvdimage:
             self.x = SCREEN_WIDTH - self.width
             # Set the velocity to the negative
             self.x_vel = -self.x_vel
+
         # Update the y-coordinate
         self.y += self.y_vel
         # If dvdimage is too high to the top
