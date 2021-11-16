@@ -46,8 +46,32 @@ class Dvdimage:
         """Update the dvdimage with x, y vel"""
         # Update the x-coordinate
         self.x += self.x_vel
+        # If dvdimage is too far to the left
+        if self.x < 0:
+            # Keep the object inside the canvas
+            self.x = 0
+            # Set the velocity to the negative
+            self.x_vel = -self.x_vel
+        # If dvdimage is too far to the right
+        if self.x + self.width > SCREEN_WIDTH:
+            # Keep the object inside the canvas
+            self.x = SCREEN_WIDTH - self.width
+            # Set the velocity to the negative
+            self.x_vel = -self.x_vel
         # Update the y-coordinate
         self.y += self.y_vel
+        # If dvdimage is too high to the top
+        if self.y < 0:
+            # Keep the object inside the canvas
+            self.y = 0
+            # Set the velocity to the negative
+            self.y_vel = -self.y_vel
+        # If dvdimage is too low to the bottom
+        if self.y + self.height > SCREEN_HEIGHT:
+            # Keep the object inside the canvas
+            self.y = SCREEN_HEIGHT - self.height
+            # Set the velocity to the negative
+            self.y_vel = -self.y_vel
 
 
 def main() -> None:
