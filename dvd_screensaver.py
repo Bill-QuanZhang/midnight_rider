@@ -13,8 +13,8 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 960
+SCREEN_HEIGHT = 540
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 WINDOW_TITLE = "<<Your Title Here>>"
 
@@ -33,10 +33,10 @@ class Dvdimage:
     """
     def __init__(self):
         self.x, self.y = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        self.width = 400
-        self.height = 497
+        self.width = 180
+        self.height = 180
         # self.colour = RED
-        self.img = pygame.image.load("./images/163600626.jpeg")
+        self.img = pygame.image.load("./images/dvdimage.png")
         self.x_vel = 5
         self.y_vel = 3
 
@@ -88,6 +88,10 @@ def main() -> None:
     clock = pygame.time.Clock()
     dvd_image = Dvdimage()
 
+    bg_image = pygame.image.load('./images/bg.jpg')
+    # Transform the size of the bg_image
+    bg_image = pygame.transform.scale(bg_image, (980, 540))
+
     # Create the main loop
     while not done:
         # Make space for the event listener
@@ -100,7 +104,9 @@ def main() -> None:
         print(f"x: {dvd_image.x}, y: {dvd_image.y}")
 
         # Draw the environment
-        screen.fill(WHITE)      # fill with background color
+        # screen.fill(WHITE)      # fill with background color
+        screen.blit(bg_image, (0, 0))
+
         # for i in range(10):
         #     pygame.draw.rect(screen, RED, [100 + i * 10, 100 + i * 10, 75, 30])
 
