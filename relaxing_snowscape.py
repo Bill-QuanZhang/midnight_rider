@@ -1,84 +1,47 @@
-# Pygame Boilerplate
+# Relaxing Snowscape
 # Author: Bill
 # 2021 Version
 
 
+import random
 import pygame
 
 pygame.init()
 
 WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
+BLACK = (0,   0,   0)
+RED = (255,   0,   0)
+GREEN = (0, 255,   0)
+BLUE = (0,   0, 255)
+BGCOLOUR = BLACK
 
-SCREEN_WIDTH = 960
-SCREEN_HEIGHT = 540
+SCREEN_WIDTH = 1024
+SCREEN_HEIGHT = 768
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
-WINDOW_TITLE = "<<Your Title Here>>"
+WINDOW_TITLE = "Relaxing Snowscape"
 
 
-class Dvdimage:
-    """Represents a dvdimage on screen
-
+class Snowflake:
+    """Snowflake on the screen
     Attributes:
-        x, y: coordinates of top-left corner
-        width: width of image in px
-        height: height of image in ps
-        # colour: 3-tuple of (r, g, b)
-        img: visual representation of our dvdimage
-        x-vel: x velocity in px/second
-        y-vel: y velocity in px/second
+        size: radius of snowflake in px
+        coords: {x: int, y:int}
+        y_vel: falling velocity in px/sec
+        colour: (r, g, b)
     """
     def __init__(self):
-        self.x, self.y = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        self.width = 180
-        self.height = 180
-        # self.colour = RED
-        self.img = pygame.image.load("./images/dvdimage.png")
-        self.x_vel = 5
-        self.y_vel = 3
-
-    def rect(self) -> pygame.rect:
-        """Return a pygame.rect that represents the dvd_image"""
-        return [self.x, self.y, self.width, self.height]
-
-    def update(self) -> None:
-        """Update the dvdimage with x, y vel"""
-        # Update the x-coordinate
-        self.x += self.x_vel
-        # If dvdimage is too far to the left
-        if self.x < 0:
-            # Keep the object inside the canvas
-            self.x = 0
-            # Set the velocity to the negative
-            self.x_vel = -self.x_vel
-        # If dvdimage is too far to the right
-        if self.x + self.width > SCREEN_WIDTH:
-            # Keep the object inside the canvas
-            self.x = SCREEN_WIDTH - self.width
-            # Set the velocity to the negative
-            self.x_vel = -self.x_vel
-
-        # Update the y-coordinate
-        self.y += self.y_vel
-        # If dvdimage is too high to the top
-        if self.y < 0:
-            # Keep the object inside the canvas
-            self.y = 0
-            # Set the velocity to the negative
-            self.y_vel = -self.y_vel
-        # If dvdimage is too low to the bottom
-        if self.y + self.height > SCREEN_HEIGHT:
-            # Keep the object inside the canvas
-            self.y = SCREEN_HEIGHT - self.height
-            # Set the velocity to the negative
-            self.y_vel = -self.y_vel
+        self.size = 2
+        # randomly place the snow on the screen
+        self.coords = (
+            random.randrange(0, SCREEN_WIDTH),
+            random.randrange(0, SCREEN_HEIGHT)
+        )
+        self.y_vel = 4
+        self.colour = WHITE
 
 
 def main() -> None:
-    """Driver of Python script"""
+    """Driver of the Python script"""
     # Create the screen
     screen = pygame.display.set_mode(SCREEN_SIZE)
     pygame.display.set_caption(WINDOW_TITLE)
@@ -86,43 +49,30 @@ def main() -> None:
     # Create some local variables that describe the environment
     done = False
     clock = pygame.time.Clock()
-    dvd_image = Dvdimage()
 
-    bg_image = pygame.image.load('./images/bg.jpg')
-    # Transform the size of the bg_image
-    bg_image = pygame.transform.scale(bg_image, (980, 540))
+    # Create one snowflake
+    snow = Snowflake()
 
-    # Create the main loop
+    # ----------- MAIN LOOP
     while not done:
-        # Make space for the event listener
+        # ----------- EVENT LISTENER
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
 
-        # Change the environment
-        dvd_image.update()
-        print(f"x: {dvd_image.x}, y: {dvd_image.y}")
+        # ----------- CHANGE ENVIRONMENT
 
-        # Draw the environment
-        # screen.fill(WHITE)      # fill with background color
-        screen.blit(bg_image, (0, 0))
+        # ----------- DRAW THE ENVIRONMENT
+        screen.fill(BGCOLOUR)      # fill with bgcolor
 
-        # for i in range(10):
-        #     pygame.draw.rect(screen, RED, [100 + i * 10, 100 + i * 10, 75, 30])
-
-        # pygame.draw.circle(screen, BLUE, [500, 150], 50)
-
-        # .blit(<surface/image>, coords)
-        screen.blit(dvd_image.img, (dvd_image.x, dvd_image.y))
-
-        # Draw our Dvdimage
-        # pygame.draw.rect(screen, dvd_image.colour, dvd_image.rect())  # method
+        # draw the snowflake
+        pygame.draw.circle(screen, snow.colour, snow.coords, snow.size)
 
         # Update the screen
         pygame.display.flip()
 
-        # Tick the clock
-        clock.tick(60)
+        # ----------- CLOCK TICK
+        clock.tick(75)
 
 
 if __name__ == "__main__":
