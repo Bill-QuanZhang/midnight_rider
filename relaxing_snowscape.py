@@ -23,6 +23,7 @@ WINDOW_TITLE = "Relaxing Snowscape"
 
 class Snowflake:
     """Snowflake on the screen
+
     Attributes:
         size: radius of snowflake in px
         coords: {x: int, y:int}
@@ -32,10 +33,10 @@ class Snowflake:
     def __init__(self):
         self.size = 2
         # randomly place the snow on the screen
-        self.coords = (
+        self.coords = [
             random.randrange(0, SCREEN_WIDTH),
             random.randrange(0, SCREEN_HEIGHT)
-        )
+        ]
         self.y_vel = 2
         self.colour = WHITE
 
