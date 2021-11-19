@@ -37,7 +37,7 @@ class Snowflake:
             random.randrange(0, SCREEN_WIDTH),
             random.randrange(0, SCREEN_HEIGHT)
         ]
-        self.y_vel = 3
+        self.y_vel = 2
         self.colour = WHITE
 
     def update(self):
@@ -66,10 +66,11 @@ def main() -> None:
 
     snowflakes = []
     # Create snowflakes in foreground
-    for i in range(num_snowflake):
+    for i in range(num_snowflake-150):
         close_snowflakes = Snowflake()
         close_snowflakes.size = 4
-        close_snowflakes.y_vel = 2
+        close_snowflakes.y_vel = 4
+        snowflakes.append(close_snowflakes)
     # Create snowflakes in background
     for i in range(num_snowflake):
         snowflakes.append(Snowflake())
