@@ -3,6 +3,7 @@
 
 
 import random
+import time
 import pygame
 
 pygame.init()
@@ -135,6 +136,10 @@ def main() -> None:
     num_blocks = 100
     num_enemies = 5
     score = 0
+    time_start = time.time()
+    time_invincible = 5
+
+    font = pygame.font.SysFont("Arial", 25)
 
     pygame.mouse.set_visible(False)
 
@@ -181,9 +186,9 @@ def main() -> None:
 
         # ----------- CHANGE ENVIRONMENT
         # Process player movement based on mouse pos
-
         mouse_pos = pygame.mouse.get_pos()
-        player.rect.x, player.rect.y = mouse_pos
+        player.rect.x = mouse_pos[0] - player.rect.width / 2
+        player.rect.y = mouse_pos[1] - player.rect.height / 2
 
         # Update the location of all sprites
         all_sprites.update()
@@ -196,11 +201,26 @@ def main() -> None:
             score += 1
             print(f"Score: {score}")
 
+        # Check all collisions between player and the ENEMIES
+        enemies_collided = pygame.sprite.spritecollide(player, enemy_sprites, False)
+
+        # Set a time for invincibility at the beginning of the game
+        if time.time() - time_start > time_invincible:
+            for enemy in enemies_collided:
+                done = True
+                print("GAME OVER!")
+
         # ----------- DRAW THE ENVIRONMENT
         screen.fill(BGCOLOUR)      # fill with bgcolor
 
         # Draw all sprites
         all_sprites.draw(screen)
+
+        # Draw the score on the screen
+        screen.blit(
+            font.render(f"Score: {score}", True, BLACK),
+            (5, 5)
+        )
 
         # Update the screen
         pygame.display.flip()
