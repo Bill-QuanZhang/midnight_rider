@@ -34,6 +34,8 @@ class Player(pygame.sprite.Sprite):
             representation of our Block
         rect: numerical representation of
             our Block [x, y, width, height]
+        health points: describe how much
+            health our player has
     """
     def __init__(self) -> None:
         # Call the superclass constructor
@@ -45,6 +47,13 @@ class Player(pygame.sprite.Sprite):
 
         # Based on the image, create a Rect for the block
         self.rect = self.image.get_rect()
+
+        # Initial health points
+        self.hp = 100
+
+    def hp_remaining(self) -> float:
+        """Return the percent of health remaining"""
+        return self.hp / 100
 
 
 class Block(pygame.sprite.Sprite):
@@ -193,22 +202,22 @@ def main() -> None:
         # Update the location of all sprites
         all_sprites.update()
 
-        # Check all collisions between player and the blocks
-        blocks_collided = pygame.sprite.spritecollide(player, block_sprites, True)
-
-        for block in blocks_collided:
-            print("HIT!")
-            score += 1
-            print(f"Score: {score}")
-
         # Check all collisions between player and the ENEMIES
         enemies_collided = pygame.sprite.spritecollide(player, enemy_sprites, False)
 
         # Set a time for invincibility at the beginning of the game
         if time.time() - time_start > time_invincible:
             for enemy in enemies_collided:
-                done = True
-                print("GAME OVER!")
+                player.hp -= 1
+                print(player.hp)
+
+            # Check all collisions between player and the blocks
+            blocks_collided = pygame.sprite.spritecollide(player, block_sprites, True)
+
+            for block in blocks_collided:
+                print("HIT!")
+                score += 1
+                print(f"Score: {score}")
 
         # ----------- DRAW THE ENVIRONMENT
         screen.fill(BGCOLOUR)      # fill with bgcolor
@@ -221,6 +230,13 @@ def main() -> None:
             font.render(f"Score: {score}", True, BLACK),
             (5, 5)
         )
+
+        # Draw a health bar
+        # Draw the background rectangle
+        pygame.draw.rect(screen, GREEN, [580, 5, 215, 20])
+        # Draw the foreground rectangle which is the remaining health
+        life_remaining = 215 - int(215 * player.hp_remaining())
+        pygame.draw.rect(screen, BLUE, [580, 5, life_remaining, 20])
 
         # Update the screen
         pygame.display.flip()
