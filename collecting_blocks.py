@@ -219,6 +219,10 @@ def main() -> None:
                 score += 1
                 print(f"Score: {score}")
 
+            if player.hp <= 0:
+                done = True
+                print("GAME OVER!")
+
         # ----------- DRAW THE ENVIRONMENT
         screen.fill(BGCOLOUR)      # fill with bgcolor
 
