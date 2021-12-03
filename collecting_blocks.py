@@ -147,6 +147,14 @@ def main() -> None:
     score = 0
     time_start = time.time()
     time_invincible = 5
+    game_state = "running"
+    endgame_cooldown = 5    # seconds
+    time_ended = 0.0
+
+    endgame_messages = {
+        "win": "Congratulations, you won!",
+        "lose": "Sorry, they got you,. Play again!"
+    }
 
     font = pygame.font.SysFont("Arial", 25)
 
@@ -196,7 +204,17 @@ def main() -> None:
         # End-game listener
         # WIN CONDITION - collect all blocks
         if score == num_blocks:
-            done = True
+            # Indicate to draw a message
+            game_state = "won"
+
+            # SET THE TIME THAT THE GAME WAS WON
+            if time_ended == 0:
+                time_ended = time.time()
+
+            # Set parameters to keep teh screen alive
+            # Wait 4 seconds to kill the screen
+            if time.time() - time_ended >= endgame_cooldown:
+                done = True
 
         # LOSE CONDITION - Player's hp goes below 0
         if player.hp_remaining() <= 0:
@@ -254,6 +272,13 @@ def main() -> None:
         # Draw the foreground rectangle which is the remaining health
         life_remaining = 215 - int(215 * player.hp_remaining())
         pygame.draw.rect(screen, BLUE, [580, 5, life_remaining, 20])
+
+        # If we've won, draw the text on the screen
+        if game_state == "won":
+            screen.blit(
+                font.render(endgame_messages["win"], True, BLACK),
+                (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+            )
 
         # Update the screen
         pygame.display.flip()
