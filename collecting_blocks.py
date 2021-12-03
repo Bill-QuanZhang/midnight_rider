@@ -143,7 +143,7 @@ def main() -> None:
     done = False
     clock = pygame.time.Clock()
     num_blocks = 100
-    num_enemies = 5
+    num_enemies = 10
     score = 0
     time_start = time.time()
     time_invincible = 5
@@ -193,6 +193,15 @@ def main() -> None:
             if event.type == pygame.QUIT:
                 done = True
 
+        # End-game listener
+        # WIN CONDITION - collect all blocks
+        if score == num_blocks:
+            done = True
+
+        # LOSE CONDITION - Player's hp goes below 0
+        if player.hp_remaining() <= 0:
+            done = True
+
         # ----------- CHANGE ENVIRONMENT
         # Process player movement based on mouse pos
         mouse_pos = pygame.mouse.get_pos()
@@ -219,9 +228,13 @@ def main() -> None:
                 score += 1
                 print(f"Score: {score}")
 
-            if player.hp <= 0:
-                done = True
-                print("GAME OVER!")
+            # if player.hp <= 0:
+            #     done = True
+            #     print("GAME OVER!")
+
+            # if score >= 100:
+            #     done = True
+            #     print("PERFECT!")
 
         # ----------- DRAW THE ENVIRONMENT
         screen.fill(BGCOLOUR)      # fill with bgcolor
