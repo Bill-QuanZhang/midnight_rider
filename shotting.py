@@ -199,6 +199,19 @@ def main() -> None:
         player.rect.x = mouse_pos[0] - player.rect.width / 2
         player.rect.y = mouse_pos[1] - player.rect.height / 2
 
+        # Check number of enemies currently on the screen
+        if len(enemy_sprites) < 1:
+            # Create enemy sprites
+            for i in range(num_enemies):
+                # Create an enemy
+                enemy = Enemy()
+
+                # Add it to the sprites list (enemy_sprites and all_sprites)
+                enemy_sprites.add(enemy)
+                all_sprites.add(enemy)
+
+            num_enemies += 5
+
         # Update the location of all sprites
         all_sprites.update()
 
