@@ -146,6 +146,10 @@ def main() -> None:
     endgame_cooldown = 5            # seconds
     time_ended = 0.0
 
+    #
+    with open("data/shotting_highest_score.txt") as f:
+        high_score = int(f.readline().strip())
+
     endgame_messages = {
         "win": "Congratulations, you won!",
         "lose": "Sorry, they got you. Play again!",
@@ -247,6 +251,11 @@ def main() -> None:
         all_sprites.draw(screen)
 
         # Draw the score on the screen
+        # draw teh high score
+        screen.blit(
+            font.render(f"Score: {score}", True, BLACK),
+            (5, 5)
+        )
         screen.blit(
             font.render(f"Score: {score}", True, BLACK),
             (5, 5)
@@ -271,6 +280,15 @@ def main() -> None:
 
         # ----------- CLOCK TICK
         clock.tick(75)
+
+    # Clean-up
+
+    # Update the high score if the current score is the highest
+    with open("data/shotting_highest_score.txt", "w") as f:
+        if score > high_score:
+            f.write(str(score))
+        else:
+            f.write(str(high_score))
 
 
 if __name__ == "__main__":
