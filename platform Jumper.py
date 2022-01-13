@@ -178,6 +178,7 @@ class Level_01(Level):
         level = [[210, 70, 500, 500],
                  [210, 70, 200, 400],
                  [210, 70, 600, 300],
+                 [210, 70, 100, 200]
                  ]
 
         # Go through the array above and add platforms
