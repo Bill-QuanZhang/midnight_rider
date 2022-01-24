@@ -148,7 +148,7 @@ def main() -> None:
 
     #
     with open("data/shotting_highest_score.txt") as f:
-        high_score = int(f.readline().strip())
+        high_score = f.readline().strip()
 
     endgame_messages = {
         "win": "Congratulations, you won!",
@@ -163,15 +163,6 @@ def main() -> None:
     all_sprites = pygame.sprite.Group()
     enemy_sprites = pygame.sprite.Group()
     bullet_sprites = pygame.sprite.Group()
-
-    # Create enemy sprites
-    for i in range(num_enemies):
-        # Create an enemy
-        enemy = Enemy()
-
-        # Add it to the sprites list (enemy_sprites and all_sprites)
-        enemy_sprites.add(enemy)
-        all_sprites.add(enemy)
 
     # Create the Player block
     player = Player()
@@ -193,7 +184,11 @@ def main() -> None:
                     bullet_sprites.add(bullet)
                     all_sprites.add(bullet)
 
-        # LOSE CONDITION - Player's hp goes below 0
+        # Listen for the spacebar on keyboard
+        if pygame.key.get_pressed()[pygame.K_SPACE]:
+            # Do something for the keyboard
+            pass
+
         if player.hp_remaining() <= 0:
             done = True
 
@@ -203,7 +198,7 @@ def main() -> None:
         player.rect.x = mouse_pos[0] - player.rect.width / 2
         player.rect.y = mouse_pos[1] - player.rect.height / 2
 
-        # Check number of enemies currently on the screen
+        # Check numbers of enemies currently on the screen
         if len(enemy_sprites) < 1:
             # Create enemy sprites
             for i in range(num_enemies):
@@ -214,7 +209,7 @@ def main() -> None:
                 enemy_sprites.add(enemy)
                 all_sprites.add(enemy)
 
-            num_enemies += 5
+            num_enemies += 5  # scale the degree of difficulty
 
         # Update the location of all sprites
         all_sprites.update()
@@ -245,20 +240,20 @@ def main() -> None:
                 bullet.kill()
 
         # ----------- DRAW THE ENVIRONMENT
-        screen.fill(BGCOLOUR)      # fill with bgcolor
+        screen.fill(BGCOLOUR)  # fill with bgcolor
 
         # Draw all sprites
         all_sprites.draw(screen)
 
         # Draw the score on the screen
-        # draw teh high score
+        # Draw the high score
         screen.blit(
             font.render(f"Score: {score}", True, BLACK),
             (5, 5)
         )
         screen.blit(
-            font.render(f"Score: {score}", True, BLACK),
-            (5, 5)
+            font.render(f"High Score: {high_score}", True, BLACK),
+            (5, 28)
         )
 
         # Draw a health bar
@@ -284,7 +279,7 @@ def main() -> None:
     # Clean-up
 
     # Update the high score if the current score is the highest
-    with open("data/shotting_highest_score.txt", "w") as f:
+    with open("./data/shootemup_highscore.txt", "w") as f:
         if score > high_score:
             f.write(str(score))
         else:
